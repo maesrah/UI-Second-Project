@@ -15,16 +15,21 @@ class HostWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Row(children: [
-        ClipOval(
-          child: Container(
-            width: 70,
-            height: 70,
-            child: Image.asset(
-              imageHost,
-              fit: BoxFit.cover,
-            ),
-          ),
+        CircleAvatar(
+          radius: 24,
+          backgroundImage: AssetImage(imageHost),
         ),
+        // Container(
+        //   width: 24 * 2,
+        //   height: 24 * 2,
+        //   decoration: BoxDecoration(
+        //     shape: BoxShape.circle,
+        //     image: DecorationImage(
+        //       image: AssetImage(imageHost),
+        //       fit: BoxFit.cover,
+        //     ),
+        //   ),
+        // ),
         const SizedBox(
           width: 10,
         ),

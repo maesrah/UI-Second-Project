@@ -8,7 +8,7 @@ class AmenitiesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(0),
       child: Container(
         width: 70,
         height: 100,
@@ -17,19 +17,21 @@ class AmenitiesWidget extends StatelessWidget {
             border: Border.all(color: Colors.grey)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Icon(
-              icon,
-              size: 30,
-            ),
-            Expanded(
-              child: Text(
-                caption,
-                style: const TextStyle(fontSize: 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                icon,
+                size: 30,
               ),
-            )
-          ]),
+              Expanded(
+                child: Text(
+                  caption,
+                  style: const TextStyle(fontSize: 14),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

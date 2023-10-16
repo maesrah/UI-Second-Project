@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uisecondproject/model/apartment_model.dart';
+import 'package:uisecondproject/theme.dart';
 import 'package:uisecondproject/widget/choice_widget.dart';
 // import 'package:uisecondproject/model/item_model.dart';
 import 'package:uisecondproject/widget/item_widget.dart';
@@ -87,7 +89,6 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0.0,
         centerTitle: true,
         leading: IconButton(
@@ -98,44 +99,57 @@ class _DashboardPageState extends State<DashboardPage> {
             // Navigator.of(context).pop();
           },
         ),
-        title: TextField(
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20.0),
-              borderSide: const BorderSide(color: Colors.grey),
+        title: SizedBox(
+          height: 40,
+          child: TextField(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                borderSide: const BorderSide(color: Colors.grey),
+              ),
+              hintText: "Search",
+              prefixIcon: const Icon(Icons.search),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 0,
+                horizontal: 16.0,
+              ),
             ),
-            hintText: "Search",
-            suffixIcon: const Icon(Icons.search),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
           ),
         ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.comment),
+            icon: const Icon(CupertinoIcons.chat_bubble),
             //color: Colors.black,
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(CupertinoIcons.heart),
             //color: Colors.black,
           )
         ],
       ),
       body: ListView(
         children: [
+          const SizedBox(height: kSectionSpacingSm),
           ChoiceWidget(choicesList: choicesList),
+          const SizedBox(height: kSectionSpacingSm),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: kScreenPadding),
             child: Text(
               'Found 724 hosts',
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
-          for (final item in apartmentList) ItemWidget(itemModel: item),
+          const SizedBox(height: kSectionSpacingSm),
+          for (final item in apartmentList)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: kScreenPadding),
+              margin: const EdgeInsets.only(bottom: kSectionSpacingMd),
+              child: ItemWidget(itemModel: item),
+            ),
         ],
       ),
     );

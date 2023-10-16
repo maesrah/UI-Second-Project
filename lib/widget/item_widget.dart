@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uisecondproject/model/apartment_model.dart';
 // import 'package:uisecondproject/model/item_model.dart';
 import 'package:uisecondproject/screen/details_page.dart';
+import 'package:uisecondproject/theme.dart';
 
 class ItemWidget extends StatefulWidget {
   const ItemWidget({
@@ -35,13 +36,13 @@ class _ItemWidgetState extends State<ItemWidget> {
     //   ),
     // );
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return SizedBox(
+      height: 170,
       child: Row(
         children: [
           Container(
             height: 170,
-            width: 150,
+            width: 170,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               image: DecorationImage(
@@ -50,9 +51,7 @@ class _ItemWidgetState extends State<ItemWidget> {
               ),
             ),
           ),
-          const SizedBox(
-            width: 10,
-          ),
+          const SizedBox(width: kSectionSpacingSm),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,34 +59,34 @@ class _ItemWidgetState extends State<ItemWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.black)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(widget.itemModel.tenants),
+                    Chip(
+                      label: Text(widget.itemModel.tenants),
+                      shape: const StadiumBorder(
+                        side: BorderSide(color: Colors.grey),
                       ),
+                      backgroundColor: Colors.transparent,
+                      visualDensity: VisualDensity.compact,
                     ),
                     IconButton.filled(
-                        color: isFavorite
-                            ? Colors.black
-                            : Theme.of(context).primaryColor,
-                        onPressed: () {
-                          setState(() {
-                            isFavorite = !isFavorite;
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(isFavorite
-                                    ? 'Added to favorites'
-                                    : 'Removed from favorites'),
-                              ),
-                            );
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.favorite,
-                        ))
+                      color: isFavorite
+                          ? Theme.of(context).primaryColor
+                          : Colors.black,
+                      onPressed: () {
+                        setState(() {
+                          isFavorite = !isFavorite;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(isFavorite
+                                  ? 'Added to favorites'
+                                  : 'Removed from favorites'),
+                            ),
+                          );
+                        });
+                      },
+                      icon: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_outline,
+                      ),
+                    )
                   ],
                 ),
                 InkWell(
@@ -102,70 +101,76 @@ class _ItemWidgetState extends State<ItemWidget> {
                     );
                   },
                   child: Text(
-                    widget.itemModel.name,
+                    widget.itemModel.name +
+                        ' add one more line lakd lakd laksd asd ',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context)
                         .textTheme
-                        .headlineSmall
+                        .titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-
+                const SizedBox(height: 6),
                 RichText(
                   text: TextSpan(children: [
-                    const WidgetSpan(
-                        alignment: PlaceholderAlignment.middle,
-                        child: Icon(Icons.location_city_rounded)),
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: Icon(
+                        Icons.location_city_outlined,
+                        size: 20,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
                     TextSpan(
                       text: widget.itemModel.location,
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ]),
+                  maxLines: 1,
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 2),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     RichText(
-                      text: TextSpan(children: [
-                        const WidgetSpan(
+                      text: TextSpan(
+                        children: [
+                          WidgetSpan(
                             alignment: PlaceholderAlignment.middle,
-                            child: Icon(Icons.star_border_outlined)),
-                        TextSpan(
-                          text: widget.itemModel.ratingItem.toString(),
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ]),
+                            child: Icon(
+                              Icons.star_border_outlined,
+                              size: 20,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          TextSpan(
+                            text: widget.itemModel.ratingItem.toString(),
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
                     ),
-
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    // Replace with your desired icon
+                    const SizedBox(width: 6),
                     Text(
                       '| ${widget.itemModel.totalReviews} reviews',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium, // Replace with your desired text
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 6),
                 RichText(
                   text: TextSpan(children: [
                     TextSpan(
                       text: 'RM${widget.itemModel.rentPrice}',
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                     TextSpan(
                       text: ' per month',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ]),
                 ),

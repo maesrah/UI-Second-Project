@@ -14,55 +14,52 @@ class RateReviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.black)),
-            child: Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Text(
-                tenants,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                RichText(
-                  text: TextSpan(children: [
-                    const WidgetSpan(
-                        alignment: PlaceholderAlignment.middle,
-                        child: Icon(Icons.star_border_outlined)),
-                    TextSpan(
-                      text: ratingItem,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ]),
-                ),
-              ],
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+    return Row(
+      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black)),
+          child: Padding(
+            padding: const EdgeInsets.all(6.0),
             child: Text(
-              '$totalReviews reviews',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium, // Replace with your desired text
+              tenants,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
-          // Replace with your desired icon
-        ],
-      ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              RichText(
+                text: TextSpan(children: [
+                  const WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: Icon(Icons.star_border_outlined)),
+                  TextSpan(
+                    text: ratingItem,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ]),
+              ),
+            ],
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '$totalReviews reviews',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium, // Replace with your desired text
+          ),
+        ),
+        // Replace with your desired icon
+      ],
     );
   }
 }

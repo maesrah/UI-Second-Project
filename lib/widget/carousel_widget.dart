@@ -9,15 +9,16 @@ class CarousellWidget extends StatefulWidget {
 }
 
 class _CarousellWidgetState extends State<CarousellWidget> {
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0;
-    return Column(children: [
-      Padding(
-        padding: const EdgeInsets.only(top: 50),
-        child: CarouselSlider(
+    return Column(
+      children: [
+        CarouselSlider(
           options: CarouselOptions(
               //autoPlay: true,
+              viewportFraction: 1,
               height: MediaQuery.of(context).size.height / 3,
               // autoPlayCurve: Curves.fastOutSlowIn,
               autoPlayAnimationDuration: const Duration(milliseconds: 800),
@@ -31,21 +32,17 @@ class _CarousellWidgetState extends State<CarousellWidget> {
           items: widget.myImages.map((item) {
             return Container(
               width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: Theme.of(context).primaryColorLight),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  item,
-                  fit: BoxFit.cover,
-                ),
+              child: Image.asset(
+                item,
+                fit: BoxFit.cover,
               ),
             );
           }).toList(),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 }
